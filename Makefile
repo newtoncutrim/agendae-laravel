@@ -19,21 +19,6 @@ up:
 # Parar os contêineres
 stop:
 	$(DOCKER_COMPOSE) down
-
-# Rodar PHPStan
-phpstan:
-	cd $(BACKEND_DIR) && ./vendor/bin/phpstan analyse
-
-# Rodar Laravel Pint
-pint:
-	cd $(BACKEND_DIR) && ./vendor/bin/pint
-
-# Rodar ambos (PHPStan e Pint)
-check:
-	make phpstan
-	make pint
-bash:
-	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) bash
 # Exibir ajuda
 help:
 	@echo "Comandos disponíveis:"

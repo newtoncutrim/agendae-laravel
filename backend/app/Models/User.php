@@ -25,7 +25,7 @@ class User extends Authenticatable
         'phone',
         'cpf',
         'cnpj',
-        'role_id'
+        'role_id',
     ];
 
     /**

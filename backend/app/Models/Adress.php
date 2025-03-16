@@ -17,6 +17,6 @@ class Adress extends Model
         'state',
         'country',
         'cep',
-        'user_id'
+        'user_id',
     ];
 }
