@@ -11,7 +11,7 @@ start:
 	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) composer install
 	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) cp .env.example .env || true
 	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) php artisan key:generate
-	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) php artisan migrate --seed
+	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) php artisan migrate
 	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) php artisan storage:link
 
 up:

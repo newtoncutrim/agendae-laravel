@@ -3,6 +3,7 @@ help:
 	make -C .. help
 up:
 	make -C .. up
+	./setup-git-hooks.sh
 stop:
 	make -C .. stop
 
