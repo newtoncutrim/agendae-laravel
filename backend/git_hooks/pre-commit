@@ -3,9 +3,9 @@
 # Rodando PHP-CS-Fixer
 output=$(docker compose exec app ./vendor/bin/pint)
 
-phpstan_output=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=./phpstan.neon --memory-limit=-1)
+phpstan_output=$(docker compose exec app ./vendor/bin/phpstan analyse)
 # Rodando PHPStan e garantindo saída em formato JSON
-phpstan_erro=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=./phpstan.neon --memory-limit=-1 --error-format=json)
+phpstan_erro=$(docker compose exec app ./vendor/bin/phpstan analyse --error-format=json)
 
 # Exibindo a saída do PHPStan
 echo "$phpstan_output"
