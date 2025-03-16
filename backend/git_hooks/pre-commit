@@ -3,8 +3,8 @@
 # Rodando PHP-CS-Fixer
 output=$(docker compose exec app ./vendor/bin/pint)
 echo "rodando PHP-CS-Fixer"
-phpstan_output=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=/var/www/phpstan.neon --memory-limit=-1)
-phpstan_erro=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=/var/www/phpstan.neon --memory-limit=-1 --error-format=json)
+phpstan_output=$(docker compose exec app ./vendor/bin/phpstan analyse )
+phpstan_erro=$(docker compose exec app ./vendor/bin/phpstan analyse)
 echo "rodando PHPStan"
 # Exibindo a saída do PHPStan
 echo "$phpstan_output"
