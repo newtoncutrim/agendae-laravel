@@ -12,7 +12,7 @@ echo "$phpstan_output"
 
 # Verificando erros do PHPStan
 error_count=$(echo "$phpstan_erro" | jq '.files | to_entries | map(select(.value.errors > 0)) | length')
-
+echo "$error_count"
 if [[ $error_count -gt 0 ]]; then
   echo "Erro(s) encontrado(s) pelo PHPStan. Corrija os erros antes de continuar."
   exit 1
