@@ -5,7 +5,7 @@
 Clone Repositório
 
 ```sh
-git clone https://github.com/newtoncutrim/agendai
+git clone https://github.com/Coimbra777/Agendai.git
 ```
 
 ```sh
