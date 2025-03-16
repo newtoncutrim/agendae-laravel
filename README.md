@@ -42,12 +42,6 @@ Gere a key do projeto Laravel
 php artisan key:generate
 ```
 
-OPCIONAL: Gere o banco SQLite (caso não use o banco MySQL)
-
-```sh
-touch database/database.sqlite
-```
-
 Rodar as migrations
 
 ```sh
@@ -56,3 +50,22 @@ php artisan migrate
 
 Acesse o projeto
 [http://localhost:8000](http://localhost:8000)
+
+Para Executar o front
+
+```sh
+cd frontend/agendai
+```
+
+Rodar o NPM
+
+```sh
+npm install
+```
+
+```sh
+npm run dev
+```
+
+Acesse o projeto
+[http://localhost:5173/](http://localhost:5173/)
