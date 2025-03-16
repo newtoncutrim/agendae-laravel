@@ -2,20 +2,22 @@
 
 # Rodando PHP-CS-Fixer
 output=$(docker compose exec app ./vendor/bin/pint)
-
+echo "rodando PHP-CS-Fixer"
 phpstan_output=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=/var/www/phpstan.neon --memory-limit=-1)
 phpstan_erro=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=/var/www/phpstan.neon --memory-limit=-1 --error-format=json)
-
+echo "rodando PHPStan"
 # Exibindo a saída do PHPStan
 echo "$phpstan_output"
 
 # Verificando erros do PHPStan
 error_count=$(echo "$phpstan_erro" | jq '.files | to_entries | map(select(.value.errors > 0)) | length')
+echo "rodando conferindo errors  $error_count"
 echo "$error_count"
 if [[ $error_count -gt 0 ]]; then
   echo "Erro(s) encontrado(s) pelo PHPStan. Corrija os erros antes de continuar."
   exit 1
 fi
+echo "rodando conferindo errors final $error_count"
 
 # Verificando se o arquivo phpstan.neon existe
 if [ -f "./phpstan.neon" ]; then
