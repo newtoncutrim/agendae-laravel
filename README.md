@@ -1,58 +1,49 @@
-# Setup Docker Laravel 11 com PHP 8.3
+## PRA RODAR!!
 
-### Passo a passo
-
-Clone Repositório
-
-```sh
-git clone https://github.com/Coimbra777/Agendai.git
+```
+docker compose up -d --build
 ```
 
-```sh
-cd backend
 ```
-
-Suba os containers do projeto
-
-```sh
-docker compose up -d
-```
-
-Crie o Arquivo .env
-
-```sh
 cp .env.example .env
 ```
 
-Acesse o container app
-
-```sh
-docker compose exec app bash
+```
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=agendai
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
-Instale as dependências do projeto
+```
+docker compose exec app bash composer install
+```
 
-```sh
+```
 composer install
 ```
 
-Gere a key do projeto Laravel
-
-```sh
+```
 php artisan key:generate
 ```
-
-OPCIONAL: Gere o banco SQLite (caso não use o banco MySQL)
-
-```sh
-touch database/database.sqlite
 ```
-
-Rodar as migrations
-
-```sh
 php artisan migrate
 ```
 
-Acesse o projeto
-[http://localhost:8000](http://localhost:8000)
+## Entrar no diretório do Adendai e rodar:
+
+```
+npm install
+```
+
+```
+npm run build
+```
+
+```
+npm run dev
+```
+
+
