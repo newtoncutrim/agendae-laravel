@@ -18,12 +18,12 @@ if [[ $error_count -gt 0 ]]; then
   exit 1
 fi
 
-# Verificando se o arquivo phpstan.dist.neon existe
-if [ -f "./phpstan.dist.neon" ]; then
+# Verificando se o arquivo phpstan.neon existe
+if [ -f "./phpstan.neon" ]; then
   # Caso o arquivo phpstan.dist.neon exista, restaura a lista de arquivos ignorados
-  sed -i 's/#.*-.*phpstan-baseline.neon/\t- .*phpstan-baseline.neon/' phpstan.dist.neon
+  sed -i 's/#.*-.*phpstan-baseline.neon/\t- .*phpstan-baseline.neon/' phpstan.neon
 else
-  echo "Arquivo phpstan.dist.neon não encontrado. Ignorando restauração de lista de arquivos."
+  echo "Arquivo phpstan.neon não encontrado. Ignorando restauração de lista de arquivos."
 fi
 
 exit 0
