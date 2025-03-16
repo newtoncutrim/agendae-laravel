@@ -3,11 +3,12 @@
 # Rodando PHP-CS-Fixer
 output=$(docker compose exec app ./vendor/bin/pint)
 
+phpstan_output=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=./phpstan.neon --memory-limit=-1)
 # Rodando PHPStan e garantindo saída em formato JSON
 phpstan_erro=$(docker compose exec app ./vendor/bin/phpstan analyse --configuration=./phpstan.neon --memory-limit=-1 --error-format=json)
 
 # Exibindo a saída do PHPStan
-echo "$phpstan_erro"
+echo "$phpstan_output"
 
 # Verificando erros do PHPStan
 error_count=$(echo "$phpstan_erro" | jq '.files | to_entries | map(select(.value.errors > 0)) | length')
