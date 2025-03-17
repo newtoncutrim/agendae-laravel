@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<form id="chat">
+    <input type="text" id="username" placeholder="Your Name">
+    <div class="messages"></div>
+    <input type="text" id="message" placeholder="Type a message">
+    <button type="submit">Send</button>
+</form>
+
+<script type="text/javascript">
+    var socket = io('http://localhost:3001');
+
+    function appendMessage(message) {
+        $('.messages').append(`<p>autor:${message.author} mensage: ${message.message}</p>`);
+    }
+
+    socket.on('receiveMessage', function (data) {
+        appendMessage(data);
+    })
+    $('#chat').submit(function (e) {
+        e.preventDefault();
+        let author = $('#username').val();
+        let message = $('#message').val();
+
+        if (author && message) {
+            let msgData = { author: author, message: message };
+            socket.emit('message', msgData);
+            appendMessage(msgData);
+            $('#message').val('');
+        }
+    });
+
+    socket.on('connect', function () {
+        console.log('Connected to server');
+    });
+
+    socket.on('message', function (data) {
+        $('.messages').append(`<p><strong>${data.author}:</strong> ${data.message}</p>`);
+    });
+</script>
+</body>
+</html>
