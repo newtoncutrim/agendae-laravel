@@ -21,6 +21,8 @@ down:
 # Parar os contêineres
 stop:
 	$(DOCKER_COMPOSE) down
+bash:
+	$(DOCKER_COMPOSE) exec $(CONTAINER_NAME) bash
 # Exibir ajuda
 help:
 	@echo "Comandos disponíveis:"
