@@ -4,6 +4,9 @@ help:
 up:
 	make -C .. up
 	./setup-git-hooks.sh
+down:
+	@make -C .. down
+
 stop:
 	make -C .. stop
 

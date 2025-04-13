@@ -16,6 +16,8 @@ start:
 
 up:
 	$(DOCKER_COMPOSE) up -d
+down:
+	$(DOCKER_COMPOSE) down
 # Parar os contêineres
 stop:
 	$(DOCKER_COMPOSE) down
