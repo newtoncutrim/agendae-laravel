@@ -4,11 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class Users extends Controller
 {
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         if (User::where('email', $request->email)->exists()) {
             return response()->json([
@@ -19,6 +20,12 @@ class Users extends Controller
         if (User::where('cpf', $request->cpf)->exists()) {
             return response()->json([
                 'message' => 'O CPF já está em uso.',
+            ], 400);
+        }
+
+        if (! is_string($request->password)) {
+            return response()->json([
+                'message' => 'A senha precisa ser uma string.',
             ], 400);
         }
 
@@ -33,7 +40,7 @@ class Users extends Controller
 
         return response()->json([
             'message' => 'Usuário criado com sucesso!',
-            'user' => $user
+            'user' => $user,
         ], 201);
     }
 }
