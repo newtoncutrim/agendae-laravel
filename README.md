@@ -69,3 +69,6 @@ npm run dev
 
 Acesse o projeto
 [http://localhost:5173/](http://localhost:5173/)
+
+Modelagem db:
+https://drawsql.app/teams/newton-cutrim/diagrams/agendai
