@@ -43,6 +43,19 @@ services:
         networks:
             - laravel
 
+    db_test:
+        image: mysql:8.0
+        platform: linux/x86_64
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE:-laravel_test}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+        volumes:
+            - ./.docker/mysql_test/dbdata:/var/lib/mysql
+        ports:
+            - "3301:3306"
+        networks:
+            - laravel
     # PHPMyAdmin
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
