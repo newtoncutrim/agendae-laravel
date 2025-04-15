@@ -14,10 +14,8 @@ class UserTest extends TestCase
 
     public function test_user_can_be_registered_and_has_role()
     {
-        // Criar o papel que será atribuído ao usuário
         $role = Role::create(['name' => 'cliente']);
 
-        // Dados simulados do usuário
         $userData = [
             'name' => 'João da Silva',
             'email' => 'joao@example.com',
@@ -28,10 +26,8 @@ class UserTest extends TestCase
             'role' => 'cliente',
         ];
 
-        // Fazer requisição POST para o endpoint de registro
-        $response = $this->postJson('/api/users/register', $userData);
+        $response = $this->post('/api/register', $userData);
 
-        // Checar se a resposta foi 201 e mensagem de sucesso
         $response->assertStatus(201)
                  ->assertJson([
                      'message' => 'Usuário criado com sucesso!',
@@ -40,13 +36,12 @@ class UserTest extends TestCase
                      ],
                  ]);
 
-        // Verificar se o usuário foi criado no banco
         $this->assertDatabaseHas('users', [
             'email' => 'joao@example.com',
             'cpf' => '12345678901',
         ]);
 
-        // Verificar se a tabela pivot role_user possui o relacionamento
+
         $user = User::where('email', 'joao@example.com')->first();
         $this->assertTrue($user->roles->contains('id', $role->id));
     }
