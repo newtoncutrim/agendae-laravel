@@ -5,11 +5,35 @@ namespace App\Http\Controllers\Api\User;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
+use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class Users extends Controller
 {
+    public function __construct(private UserService $userServe)
+    {
+        
+    }
+
+    public function index(): JsonResponse
+    {
+        $data = $this->userServe->all();
+
+        if(!$data) {
+
+            return response()->json([
+                'data' => $data,
+                'message' => 'Sem usuarios'
+            ]);
+        }
+
+        return response()->json([
+                'data' => $data,
+                'message' => 'Sucesso'
+            ]);
+    }
+
     public function register(Request $request): JsonResponse
     {
         // Verificar se o e-mail já está em uso
