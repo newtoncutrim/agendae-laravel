@@ -34,7 +34,26 @@ class Users extends Controller
             ]);
     }
 
-    public function register(Request $request): JsonResponse
+    public function show($id): JsonResponse
+    {
+        $user = $this->userServe->find($id);
+
+        if(!$user) {
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Sem usuarios'
+            ]);
+        }
+
+        return response()->json([
+                'data' => $user,
+                'message' => 'Sucesso'
+            ]);
+
+    }
+
+    public function create(Request $request): JsonResponse
     {
         // Verificar se o e-mail já está em uso
         if (User::where('email', $request->email)->exists()) {
