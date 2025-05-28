@@ -102,6 +102,24 @@ class Users extends Controller
             'user' => $user->load('roles'),
         ], 201);
     }
+
+    public function destroy($id): JsonResponse
+    {
+        $user = $this->userServe->delete($id);
+
+        if(!$user) {
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Sem usuarios'
+            ]);
+        }
+
+        return response()->json([
+                'data' => $user,
+                'message' => 'Deletado com sucesso'
+            ]);
+    }
 }
 
 // adcionaa tabela pivot role_user  no diagrama
