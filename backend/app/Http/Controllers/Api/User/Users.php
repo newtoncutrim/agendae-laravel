@@ -103,6 +103,33 @@ class Users extends Controller
         ], 201);
     }
 
+    public function update($id, Request $request): JsonResponse
+    {
+        $user = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'number' => $request->number,
+            'cpf' => $request->cpf,
+            'cnpj' => $request->cnpj,
+        ];
+
+         if(!$user) {
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Not Update'
+            ]);
+        }
+
+        $user = $this->userServe->update( $id, $user);            
+
+        return response()->json([
+                'data' => $user,
+                'message' => 'Sucesso'
+            ]);
+    }
+
     public function destroy($id): JsonResponse
     {
         $user = $this->userServe->delete($id);

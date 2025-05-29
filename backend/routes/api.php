@@ -14,3 +14,5 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::post('/register', [Users::class, 'register']);
 
 Route::resource('/users', Users::class);
+
+// Route::put('/users/{user}', [Users::class, 'update']);
