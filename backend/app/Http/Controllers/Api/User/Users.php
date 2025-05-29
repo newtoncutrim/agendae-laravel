@@ -34,7 +34,26 @@ class Users extends Controller
             ]);
     }
 
-    public function register(Request $request): JsonResponse
+    public function show($id): JsonResponse
+    {
+        $user = $this->userServe->find($id);
+
+        if(!$user) {
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Sem usuarios'
+            ]);
+        }
+
+        return response()->json([
+                'data' => $user,
+                'message' => 'Sucesso'
+            ]);
+
+    }
+
+    public function create(Request $request): JsonResponse
     {
         // Verificar se o e-mail já está em uso
         if (User::where('email', $request->email)->exists()) {
@@ -82,6 +101,51 @@ class Users extends Controller
             'message' => 'Usuário criado com sucesso!',
             'user' => $user->load('roles'),
         ], 201);
+    }
+
+    public function update($id, Request $request): JsonResponse
+    {
+        $user = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'number' => $request->number,
+            'cpf' => $request->cpf,
+            'cnpj' => $request->cnpj,
+        ];
+
+         if(!$user) {
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Not Update'
+            ]);
+        }
+
+        $user = $this->userServe->update( $id, $user);            
+
+        return response()->json([
+                'data' => $user,
+                'message' => 'Sucesso'
+            ]);
+    }
+
+    public function destroy($id): JsonResponse
+    {
+        $user = $this->userServe->delete($id);
+
+        if(!$user) {
+
+            return response()->json([
+                'data' => $user,
+                'message' => 'Sem usuarios'
+            ]);
+        }
+
+        return response()->json([
+                'data' => $user,
+                'message' => 'Deletado com sucesso'
+            ]);
     }
 }
 

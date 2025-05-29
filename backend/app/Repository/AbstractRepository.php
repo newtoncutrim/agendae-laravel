@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Repository\Interfaces\RepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
@@ -13,7 +14,7 @@ abstract class AbstractRepository implements RepositoryInterface
         $this->model = $model;
     }
 
-    public function all(): array
+    public function all(): Collection
     {
         return $this->model->all();
     }
